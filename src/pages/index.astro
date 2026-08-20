@@ -1,56 +1,64 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import brandsData from '../data/brands.json';
 
-const regions = [
-  { code: 'tw', name: '台灣 / Taiwan', icon: '🇹🇼', desc: '繁體中文市場', color: 'from-blue-900 to-slate-900' },
-  { code: 'in', name: 'India', icon: '🇮🇳', desc: 'English Market', color: 'from-orange-900 to-slate-900' },
-  { code: 'ph', name: 'Philippines', icon: '🇵🇭', desc: 'English Market', color: 'from-red-900 to-slate-900' },
-  { code: 'hk', name: '香港 / Hong Kong', icon: '🇭🇰', desc: '繁體中文市場', color: 'from-purple-900 to-slate-900' },
-  { code: 'bd', name: 'Bangladesh', icon: '🇧🇩', desc: 'Regional Market', color: 'from-emerald-900 to-slate-900' },
-];
+const twBrands = brandsData.filter(b => b.country === 'tw');
 ---
 
 <Layout>
-  <main class="min-h-screen flex flex-col items-center justify-center p-6 pt-20">
+  <div class="max-w-7xl mx-auto px-4 py-12 relative z-10 pt-20">
+    <!-- Header -->
     <div class="text-center mb-16 relative">
       <div class="absolute -inset-x-20 top-1/2 -translate-y-1/2 h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent"></div>
-      <h1 class="font-['Cinzel'] text-5xl md:text-7xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 via-yellow-500 to-yellow-700 uppercase drop-shadow-[0_0_15px_rgba(234,179,8,0.3)] inline-block px-8 bg-slate-950 relative z-10">
-        Premium Casino
+      <h1 class="font-['Cinzel'] text-4xl md:text-6xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 via-yellow-500 to-yellow-700 drop-shadow-[0_0_15px_rgba(234,179,8,0.3)] inline-block px-8 bg-slate-950 relative z-10">
+        台灣區頂級娛樂城推薦
       </h1>
-      <p class="text-yellow-500/80 mt-4 tracking-[0.3em] font-light uppercase text-sm md:text-base bg-slate-950 inline-block px-4">Global Selection Hub</p>
+      <p class="text-yellow-500/80 mt-4 tracking-[0.3em] font-light uppercase text-sm md:text-base bg-slate-950 inline-block px-4">Taiwan Premium Selection</p>
     </div>
 
-    <div class="w-full max-w-5xl mx-auto">
-      <p class="text-center text-slate-400 mb-8 text-lg font-light">請選擇您的所在地區 / Please select your region</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {regions.map((region) => (
-          <a 
-            href={`/${region.code}/`}
-            class={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${region.color} p-[1px] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]`}
-          >
-            <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm transition-colors group-hover:bg-slate-950/60"></div>
-            
-            <!-- Animated Border effect -->
-            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-               <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yellow-500 to-transparent"></div>
-               <div class="absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></div>
-               <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-yellow-500 to-transparent"></div>
-               <div class="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-yellow-500 to-transparent"></div>
-            </div>
+    <!-- Brands Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {twBrands.map((brand) => (
+        <a 
+          href={`/${brand.id}`}
+          class="group relative bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-yellow-500/50 transition-all duration-300 hover:shadow-[0_10px_30px_rgba(234,179,8,0.15)] hover:-translate-y-1 flex flex-col"
+        >
+          <!-- Shiny Overlay on hover -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-yellow-500/0 via-yellow-500/0 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-            <div class="relative z-10 p-8 flex flex-col items-center justify-center text-center h-full">
-              <span class="text-5xl mb-4 drop-shadow-md transform transition-transform group-hover:-translate-y-2 group-hover:scale-110 duration-300">{region.icon}</span>
-              <h2 class="text-2xl font-bold text-slate-100 tracking-wide mb-2 group-hover:text-yellow-400 transition-colors">{region.name}</h2>
-              <p class="text-slate-400 text-sm group-hover:text-slate-300 transition-colors">{region.desc}</p>
-              
-              <div class="mt-6 overflow-hidden h-0 group-hover:h-8 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 flex items-center text-yellow-500 text-sm font-bold tracking-widest uppercase">
-                Enter Region <span class="ml-2">→</span>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
+          <!-- Logo Container -->
+          <div class="aspect-video bg-slate-950 p-6 flex items-center justify-center relative overflow-hidden border-b border-slate-800">
+             <div class="absolute inset-0 bg-yellow-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full scale-150"></div>
+             
+             <img 
+               src={brand.logo} 
+               alt={brand.name} 
+               class="w-full h-full object-contain relative z-10 filter drop-shadow-lg transform group-hover:scale-105 transition-transform duration-500"
+               loading="lazy"
+             />
+          </div>
+
+          <!-- Content -->
+          <div class="p-6 flex-grow flex flex-col">
+            <h2 class="text-xl font-bold text-slate-200 group-hover:text-yellow-400 transition-colors mb-2">{brand.name}</h2>
+            <p class="text-sm text-yellow-500/80 mb-4 font-bold flex items-center gap-2">
+              <span class="inline-block w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span>
+              {brand.bonus}
+            </p>
+            <p class="text-slate-400 text-sm line-clamp-2 mt-auto">
+              {brand.description}
+            </p>
+          </div>
+          
+          <!-- Bottom Action Bar -->
+          <div class="bg-slate-950/50 p-4 border-t border-slate-800/50 flex justify-between items-center group-hover:bg-yellow-500/5 transition-colors">
+            <span class="text-xs text-slate-500">評價: <span class="text-yellow-500 font-bold ml-1">{brand.rating} ★</span></span>
+            <span class="text-yellow-500 text-sm font-bold tracking-widest uppercase flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              查看評價 <span class="text-lg leading-none">→</span>
+            </span>
+          </div>
+        </a>
+      ))}
     </div>
-  </main>
+  </div>
 </Layout>
