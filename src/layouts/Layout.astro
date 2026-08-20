@@ -9,10 +9,23 @@ import '../styles/global.css';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>The Medifast Plan - Premium Casino Selection</title>
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-gray-900 text-gray-100">
-		<slot />
+	<body class="bg-slate-950 text-slate-200 font-['Noto_Sans_TC'] antialiased selection:bg-yellow-500 selection:text-slate-900 min-h-screen flex flex-col relative overflow-x-hidden">
+		<!-- Decorative Background Glows -->
+		<div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-yellow-600/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+		<div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+		
+		<!-- Main Content Wrapper -->
+		<div class="relative z-10 flex-grow">
+			<slot />
+		</div>
+		
+		<!-- Simple Footer -->
+		<footer class="relative z-10 border-t border-slate-800/50 bg-slate-900/50 backdrop-blur-md py-6 mt-12 text-center text-slate-500 text-sm">
+			<p>© {new Date().getFullYear()} The Medifast Plan. All rights reserved.</p>
+		</footer>
 	</body>
 </html>
 
